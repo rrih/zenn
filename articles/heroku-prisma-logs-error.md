@@ -24,10 +24,14 @@ Heroku で Node.js + prisma のアプリケーションをデプロイした時�
 
 具体的には以下のような感じ
 
-### Heroku の dataclip 
-以下のクエリで _prisma_migrations から消すべきレコードを確認する。
+### Heroku の Dataclips 
+以下のクエリで `_prisma_migrations` テーブルから消すべきレコードを確認する。
 
-#### _prisma_migrations テーブルについて
+```bash
+select id from  _prisma_migrations where logs is not null;
+```
+
+#### `_prisma_migrations` テーブルについて
 
 以下のようなテーブル構造になっている。
 
@@ -52,11 +56,7 @@ Indexes:
 
 ### 該当レコードの削除
 
-```bash
-select id from  _prisma_migrations where logs is not null;
-```
-
-上記クエリで取得した id (uuid) で heroku posgre に cli で繋いで物理削除するクエリを実行。
+上記クエリで取得した id で Heroku Postgres に cli で繋いで物理削除するクエリを実行。
 
 ``` 
 heroku-app $ psql -h ec2-XX-XXX-XXX-XXX.compute-1.amazonaws.com -U xxxxxxxxxxxxxx -d xxxxxxxxxxxxxx
@@ -69,3 +69,4 @@ xxxxxxxxxxxxxx=> delete from _prisma_migrations where id='xxxxxxxx-123a-456b-7cd
 
 https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/customizing-migrations
 https://stackoverflow.com/questions/15526776/its-possible-to-delete-a-row-in-heroku-postgresql
+https://devcenter.heroku.com/ja/articles/heroku-postgresql
