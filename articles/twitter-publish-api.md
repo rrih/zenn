@@ -3,15 +3,17 @@ title: "Twitterの埋め込みツイート取得API叩いてみる"
 emoji: "📝"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["twitter", "next.js"]
-published: false # 公開設定
+published: true # 公開設定
 ---
 
-## Twitterのツイート埋め込みの仕様について
+## Twitterのツイート埋め込みHTML取得の仕様について
 
 https://publish.twitter.com
 
 endpoint  
+```
 https://publish.twitter.com/oembed?url={url}&partner=&hide_thread=false
+```
 
 ![](https://storage.googleapis.com/zenn-user-upload/7bd2eeafa6a1-20230615.png)
 
